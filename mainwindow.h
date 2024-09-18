@@ -29,5 +29,6 @@ private:
     void closeEvent(QCloseEvent *event);
     Ui::MainWindow *ui;
     QProcess proc;
+    void getURLFromClipboard();
 };
 #endif // MAINWINDOW_H

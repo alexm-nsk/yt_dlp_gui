@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <QClipboard>
 #include <QFile>
 #include <QProcess>
 #include <QRegularExpression>
@@ -14,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QObject::connect(&proc, &QProcess::readyReadStandardOutput, this, &MainWindow::new_output);
     readSettings();
+    getURLFromClipboard();
 }
 
 MainWindow::~MainWindow()
@@ -114,4 +116,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     writeSettings();
     QWidget::closeEvent(event);
+}
+
+void MainWindow::getURLFromClipboard()
+{
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    ui->urlInput->setText(clipboard->text());
 }
